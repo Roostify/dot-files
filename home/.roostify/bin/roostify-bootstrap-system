@@ -1,0 +1,93 @@
+#!/bin/bash
+
+set -e
+
+if hash brew 2>/dev/null; then
+  echo "Brew already installed"
+else
+  echo "Installing Brew"
+  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+fi
+
+echo "Updating homebrew"
+brew update
+
+if [ -f /usr/local/etc/bash_completion 2>/dev/null ]; then
+  echo "bash completion already installed"
+else
+  echo "Installing bash-completion"
+  brew install bash-completion
+fi
+
+if hash gpg 2>/dev/null; then
+  echo "GPG not installed"
+else
+  echo "Installing GPG"
+  brew install gpg
+fi
+
+if git --version | grep 'Apple' 1>/dev/null 2>&1; then
+  echo "Installing most recent git"
+  brew install git
+else
+  echo "Recent git already installed!"
+fi
+
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+if hash rvm 2>/dev/null; then
+  echo "RVM aready installed"
+else
+  echo "Installing RVM"
+  gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
+  curl -sSL https://get.rvm.io | bash -s -- --ignore-dotfiles
+  source "$HOME/.rvm/scripts/rvm"
+fi
+
+if (ruby --version | grep '2.2' 1>/dev/null 2>&1); then
+  echo "Ruby 2.2 already installed"
+else
+  echo "Installing ruby 2.2"
+  rvm install 2.2
+fi
+
+if hash bundle 2>/dev/null; then
+  echo "bundler already installed"
+else
+  echo "Installing bundler"
+  gem install bundler
+fi
+
+if hash node 2>/dev/null; then
+  echo "node already installed"
+else
+  echo "Installing node"
+  brew install node
+fi
+
+if hash psql 2>/dev/null; then
+  echo "Postgres already installed"
+else
+  echo "Installing postgres"
+  brew install postgresql
+fi
+
+if hash docker-machine 2>/dev/null; then
+  echo "docker-machine already installed"
+else
+  echo "Installing docker-machine"
+  brew install docker-machine
+fi
+
+if hash docker 2>/dev/null; then
+  echo "docker already installed"
+else
+  echo "Installing docker"
+  brew install docker
+fi
+
+if hash heroku 2>/dev/null; then
+  echo "heroku already installed"
+else
+  echo "Installing heroku"
+  brew install heroku-toolbelt
+fi
