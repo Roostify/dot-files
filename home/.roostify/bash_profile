@@ -1,0 +1,2 @@
+export CLICOLOR="true"
+export PATH=$HOME/.roostify/bin:$PATH
