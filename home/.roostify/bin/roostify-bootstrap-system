@@ -43,11 +43,11 @@ else
   source "$HOME/.rvm/scripts/rvm"
 fi
 
-if (ruby --version | grep '2.2' 1>/dev/null 2>&1); then
-  echo "Ruby 2.2 already installed"
+if (ruby --version | grep '2.2.4' 1>/dev/null 2>&1); then
+  echo "Ruby 2.2.4 already installed"
 else
-  echo "Installing ruby 2.2"
-  rvm install 2.2
+  echo "Installing ruby 2.2.4"
+  rvm install 2.2.4
 fi
 
 if hash bundle 2>/dev/null; then
@@ -62,6 +62,13 @@ if hash node 2>/dev/null; then
 else
   echo "Installing node"
   brew install node
+fi
+
+if hash npm 2>/dev/null; then
+  echo "npm already installed"
+else
+  echo "installing npm"
+  brew install npm
 fi
 
 if hash psql 2>/dev/null; then
