@@ -1,0 +1,13 @@
+#!/bin/bash
+new=$1
+old=$2
+issues=$(git log --oneline origin/$new..origin/$old | grep -o '[a-zA-Z\/\-]*\#[0-9]*')
+repo=$(git remote get-url origin | grep -o '[a-zA-Z]*\/[a-zA-Z]*')
+for issue in $issues
+do
+  if [[ $issue =~ ^#.* ]]; then
+    echo "$repo/$issue"
+  else
+    echo $issue
+  fi
+done
